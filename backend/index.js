@@ -15,9 +15,9 @@ app.use(express.json());
 
 
 // default route
-app.get("/", (req, res => {
+app.get("/", (req, res) => {
     res.json({ message: "E-Commerce-backend web app is running..."});
-}));
+});
 
 const port = process.env.PORT || 4000;
 connectDB().then(() => {
