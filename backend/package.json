@@ -1,0 +1,30 @@
+{
+  "name": "ecommerce-backend",
+  "version": "1.0.0",
+  "description": "Simple e-commerce backend with JWT auth, items CRUD, and cart persistence",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohdsohail7/E-Commerce-Web-App.git"
+  },
+  "author": "Mohd Sohail",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohdsohail7/E-Commerce-Web-App/issues"
+  },
+  "homepage": "https://github.com/Mohdsohail7/E-Commerce-Web-App#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
