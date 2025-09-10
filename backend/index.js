@@ -13,6 +13,15 @@ app.use(cors());
 app.use(express.json());
 
 
+// routes
+const authRoutes = require("./routes/auth");
+const itemRoutes = require("./routes/items");
+const cartRoutes = require("./routes/cart");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/items", itemRoutes);
+app.use("/api/cart", cartRoutes);
+
 
 // default route
 app.get("/", (req, res) => {
