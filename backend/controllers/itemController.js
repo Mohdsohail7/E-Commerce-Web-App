@@ -27,7 +27,7 @@ exports.getItems = async (req, res) => {
         const filter = {};
         if (category) {
             const cats = category.split(",").map(cat => cat.trim());
-            filter.category = { $in: cats };
+            filter.$or = cats.map(cat => ({ category: { $regex: `^${cat}$`, $options: "i" } }));
         }
 
         if (minPrice || maxPrice) {
