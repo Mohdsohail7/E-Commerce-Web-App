@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { login } = useAuth();
+  const { login, redirectAfterLogin, setRedirectAfterLogin } = useAuth();
+  const { addItem } = useCart();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -14,6 +16,18 @@ export default function Login() {
     try {
       setError(null);
       await login({ email, password });
+
+      if (redirectAfterLogin) {
+        if (redirectAfterLogin.action === "addToCart") {
+          await addItem(redirectAfterLogin.product, 1);
+          navigate("/cart");  // go to cart page directly
+        } else {
+          navigate("/"); // fallback
+        }
+        setRedirectAfterLogin(null);
+      } else {
+        navigate("/"); // normal login -> go home
+      }
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");

@@ -1,8 +1,22 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ItemCard({ item }) {
   const { addItem } = useCart();
+  const { user, setRedirectAfterLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    if (!user) {
+      // agar login nahi hai
+      setRedirectAfterLogin({ action: "addToCart", product: item });
+      navigate("/login");
+    } else {
+      addItem(item, 1);
+    }
+  };
 
   return (
     <div className="border rounded p-4 flex flex-col">
@@ -18,10 +32,10 @@ export default function ItemCard({ item }) {
       <div className="mt-3 flex items-center justify-between">
         <div className="text-lg font-bold">₹{item.price}</div>
         <button
-          onClick={() => addItem(item, 1)}
+          onClick={handleAddToCart}
           className="px-3 py-1 bg-green-600 text-white rounded"
         >
-          Add
+          Add To Cart
         </button>
       </div>
     </div>

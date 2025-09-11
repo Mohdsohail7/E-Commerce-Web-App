@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 
 export default function Header() {
-  const { user, logout } = useAuth();
+  const { user, isAdmin, logout } = useAuth();
   const { items } = useCart();
   const navigate = useNavigate();
 
@@ -28,6 +28,13 @@ export default function Header() {
               {items.length}
             </span>
           </Link>
+
+          {/* Admin link (only visible if logged-in user is admin) */}
+          {isAdmin && (
+            <Link to="/admin/items" className="text-sm font-semibold text-purple-600">
+              Admin
+            </Link>
+          )}
 
           {user ? (
             <div className="flex items-center gap-2">

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance, { setAuthToken } from "../api/axios";
 
+
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -11,6 +12,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
+  const [redirectAfterLogin, setRedirectAfterLogin] = useState(null);
 
   useEffect(() => {
     const initialize = async () => {
@@ -58,7 +60,9 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
-  const value = { user, token, register, login, logout, loading };
+  const isAdmin = user?.isAdmin === true;
+
+  const value = { user, token, isAdmin, register, login, logout, loading, redirectAfterLogin, setRedirectAfterLogin };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

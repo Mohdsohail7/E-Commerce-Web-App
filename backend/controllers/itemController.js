@@ -39,8 +39,8 @@ exports.getItems = async (req, res) => {
 
         if (search) {
             filter.$or = [
-                { name: { $regex: search, $option: "i" }},
-                { description: { $regex: search, $option: "i" }}
+                { name: { $regex: search, $options: "i" }},
+                { description: { $regex: search, $options: "i" }}
             ];
         }
         let query = Item.find(filter);
