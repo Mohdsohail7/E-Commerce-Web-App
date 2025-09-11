@@ -10,7 +10,7 @@ const app = express();
 
 // middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "https://e-commerce-web-app-tau.vercel.app",
+    origin: process.env.FRONTEND_URL || "https://e-commerce-web-app-1zry.vercel.app",
     credentials: true
 }));
 app.use(express.json());
